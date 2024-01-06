@@ -12,9 +12,12 @@ We want to perform training and predictions using the grapevine leaves image dat
 ### What models do you expect to use
 The idea is to implement a baseline Fully Connected Neural Network to classify the leaves, as well as an improved Convolutional Neural Network (CNN) model (either made from scratch or using a pretrained model such as a ResNet or VGG).
 
-Group members:
+#### Group members
 - Jonatan Rasmussen: s183649
 - Lucca Seyther: s223280
 - Oskar Kristoffersen: s184364
 - Pelle Andersen: s205339
 - Siyao Gui: s232897
+
+#### Repository structure
+See the project_structure.md file for an overview of how the repository is structured. Note that our repository is using [this Cookiecutter template for MLOps](https://github.com/SkafteNicki/mlops_template).

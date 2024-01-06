@@ -1,4 +1,4 @@
-##### Project Plan
+## Project Plan
 
 ### Overall goal of the project
 This is the project description of group 100 for the 02476 MLOps course at DTU. Classification of winegrape leaves is important to define the type of wine that is being produced. Given a dataset with five different types of grapevine leaves. The goal of the project is to predict, given the image of a vine leaf, which grape type it comes from.

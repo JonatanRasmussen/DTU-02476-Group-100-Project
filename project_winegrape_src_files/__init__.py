@@ -1,2 +1,2 @@
-from {{cookiecutter.project_name}}.models.model import MyNeuralNet
-from {{cookiecutter.project_name}}.predict_model import predict
+from project_winegrape_src_files.models.model import MyNeuralNet
+from project_winegrape_src_files.predict_model import predict

@@ -51,13 +51,14 @@ class DataModule(LightningDataModule):
 
         train_dataset = datasets.ImageFolder(root=self.root_dir, transform=self.transform_train)
         val_dataset = datasets.ImageFolder(root=self.root_dir, transform=self.transform_val)
+        
         n_data = len(train_dataset)
         
-        split_idx = int(np.floor(self.val_split * n_data))
+        split_idx = int(np.floor(self.val_split * n_data)) 
         indices = torch.randperm(n_data)
     
         train_dataset = Subset(train_dataset, indices[split_idx:])
-        val_dataset = Subset(val_dataset, indices[:split_idx])
+        val_dataset = Subset(val_dataset, indices[:split_idx]) 
         val_dataset, test_dataset = torch.utils.data.random_split(val_dataset, [0.9, 0.1])
         
         self.train_dataset = DataLoader(train_dataset, batch_size=self.batch_size, shuffle=True, num_workers = 31)

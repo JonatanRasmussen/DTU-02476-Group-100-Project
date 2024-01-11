@@ -4,6 +4,7 @@ from data.data import DataModule
 from models.model import ImageClassifier
 from torchvision import transforms 
 
+
 def main():
     """
     Python script used to train and validate deep learning models.

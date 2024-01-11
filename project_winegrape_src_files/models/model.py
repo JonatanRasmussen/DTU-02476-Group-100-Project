@@ -7,7 +7,7 @@ import timm
 class ImageClassifier(pl.LightningModule):
     def __init__(
             self,
-            model_name='efficientnet_es.ra_in1k',
+            model_name='efficientnet_b0',
             num_classes=5,
             drop_rate=0.5,
             pretrained=False,
@@ -76,8 +76,8 @@ class ImageClassifier(pl.LightningModule):
 
         accuracy = self.calc_accuracy(preds, y)
 
-        self.log('val_loss', loss, on_step=True, on_epoch=True, prog_bar=True, logger=True)
-        self.log('val_accuracy', accuracy, on_step=True, on_epoch=True, prog_bar=True, logger=True)
+        self.log('test_loss', loss, on_step=True, on_epoch=True, prog_bar=True, logger=True)
+        self.log('test_accuracy', accuracy, on_step=True, on_epoch=True, prog_bar=True, logger=True)
         return loss
 
 

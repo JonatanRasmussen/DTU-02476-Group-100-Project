@@ -4,41 +4,47 @@ from data.data import DataModule
 from models.model import ImageClassifier
 from torchvision import transforms 
 
+import hydra
+from omegaconf import DictConfig
 
-def main():
+@hydra.main(version_base=None, config_path="conf", config_name="config")
+def main(cfg : DictConfig):
     """
     Python script used to train and validate deep learning models.
     The models are trained with the data from the grapevine leaves image dataset.
     """
     
     # Seeding for reproducibility
-    seed_everything(123)
+    seed_everything(cfg.reproducibility.seed)
 
     #-----------------------------------------------------------
     # Setting up the data
-    data_module = DataModule(transform_level='light')
+    data_module = DataModule(
+        data_dir=cfg.data.dir,
+        transform_level=cfg.data.transform_level,
+        batch_size=cfg.data.batch_size,
+        val_split=cfg.data.val_split,
+    )
     data_module.setup()
 
     #-----------------------------------------------------------
     # Choosing a model
     model = ImageClassifier(
-        model_name='efficientnet_b0',
-        #model_name = 'resnetv2_50t',
-        num_classes=5,
-        drop_rate=0.3,
-        pretrained=True,
-        lr_pretrained=1e-5,
-        lr_final=1e-4,
-        optimizer="AdamW",
-        criterion='cross_entropy',
+        model_name=cfg.model.model_name,
+        num_classes=cfg.model.num_classes,
+        drop_rate=cfg.model.drop_rate,
+        pretrained=cfg.model.pretrained,
+        lr_pretrained=cfg.optimization.lr_pretrained,
+        lr_final=cfg.optimization.lr_final,
+        optimizer=cfg.optimization.optimizer,
+        criterion=cfg.optimization.criterion,
     )
-
 
     #-----------------------------------------------------------
     # Training the model
     trainer = Trainer(
-        max_epochs = 40,
-        log_every_n_steps = 40
+        max_epochs = cfg.training.max_epochs,
+        log_every_n_steps = cfg.logging.log_every_n_steps,
     )
 
     trainer.fit(model,

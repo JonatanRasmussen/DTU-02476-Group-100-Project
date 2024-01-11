@@ -9,9 +9,15 @@ from torch.utils.data import DataLoader, Subset
 
 class DataModule(LightningDataModule):
     
-    def __init__(self, transform_level=None, batch_size=32, val_split = 0.2):
+    def __init__(
+            self,
+            data_dir="data/raw/grapevine-leaves-image-dataset/Grapevine_Leaves_Image_Dataset",
+            transform_level=None,
+            batch_size=32,
+            val_split = 0.2
+        ):
         super().__init__()
-        self.root_dir = Path(os.getcwd(),"data","raw","grapevine-leaves-image-dataset","Grapevine_Leaves_Image_Dataset")
+        self.root_dir = Path(os.getcwd(), data_dir)
         self.transform_level = transform_level
         self.batch_size = batch_size
         self.val_split = val_split

@@ -33,7 +33,7 @@ The directory structure of the project looks like this:
 │
 ├── tests                <- Test files
 │
-├── {{cookiecutter.project_name}}  <- Source code for use in this project.
+├── project_winegrape_src_files  <- Source code for use in this project.
 │   │
 │   ├── __init__.py      <- Makes folder a Python module
 │   │

@@ -4,8 +4,8 @@
 # GLOBALS                                                                       #
 #################################################################################
 
-PROJECT_NAME = {{ cookiecutter.project_name }}
-PYTHON_VERSION = {{ cookiecutter.python_version_number }}
+PROJECT_NAME = project_winegrape_src_files
+PYTHON_VERSION = 3.11
 PYTHON_INTERPRETER = python
 
 #################################################################################

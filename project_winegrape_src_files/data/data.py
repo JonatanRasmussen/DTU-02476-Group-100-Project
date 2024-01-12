@@ -13,20 +13,25 @@ class DataModule(LightningDataModule):
             self,
             data_dir="data/raw/grapevine-leaves-image-dataset/Grapevine_Leaves_Image_Dataset",
             transform_level=None,
-            batch_size=32,
-            val_split = 0.2
+            img_size = 224,
+            batch_size=8,
+            val_split = 0.2,
+            num_workers = 0
         ):
         super().__init__()
         self.root_dir = Path(os.getcwd(), data_dir)
         self.transform_level = transform_level
+        self.img_size = img_size
         self.batch_size = batch_size
         self.val_split = val_split
+        self.num_workers = num_workers
 
         self.transform_val,self.transform_train = self.which_transform()
 
     def which_transform(self):
 
         basic_transformation = [
+            transforms.Resize(self.img_size),
             transforms.ToTensor(),
             transforms.Normalize([0.485, 0.456, 0.406],[0.229, 0.224, 0.225])
         ]
@@ -67,9 +72,9 @@ class DataModule(LightningDataModule):
         val_dataset = Subset(val_dataset, indices[:split_idx]) 
         val_dataset, test_dataset = torch.utils.data.random_split(val_dataset, [0.9, 0.1])
         
-        self.train_dataset = DataLoader(train_dataset, batch_size=self.batch_size, shuffle=True, num_workers = 31)
-        self.val_dataset = DataLoader(val_dataset, batch_size=self.batch_size, shuffle = False, num_workers = 31)
-        self.test_dataset = DataLoader(test_dataset, batch_size=len(test_dataset), shuffle = False, num_workers = 31)
+        self.train_dataset = DataLoader(train_dataset, batch_size=self.batch_size, shuffle=True, num_workers = self.num_workers)
+        self.val_dataset = DataLoader(val_dataset, batch_size=self.batch_size, shuffle = False, num_workers = self.num_workers)
+        self.test_dataset = DataLoader(test_dataset, batch_size=len(test_dataset), shuffle = False, num_workers = self.num_workers)
 
     def train_dataloader(self):
         return self.train_dataset

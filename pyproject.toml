@@ -3,7 +3,7 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "your_project_name"
+name = "project_winegrape_src_files"
 version = "0.0.1"
 description = "Your project description"
 authors = [
@@ -11,11 +11,11 @@ authors = [
 ]
 license = { file = "LICENSE" }
 readme = "README.md"
-requires-python = ">=3.6"
+requires-python = "~=3.10.13"
 dynamic = ["dependencies", "optional-dependencies"]
 
 [tool.setuptools]
-packages = ["your_project_name"]
+packages = ["project_winegrape_src_files"]
 
 [tool.setuptools.dynamic]
 dependencies = { file = ["requirements.txt"] }
@@ -25,5 +25,3 @@ dev = { file = ['requirements_dev.txt'] }
 
 [tool.ruff]
 line-length = 120
-
-[tool.setuptools_scm]

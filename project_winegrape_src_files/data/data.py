@@ -16,7 +16,7 @@ class DataModule(LightningDataModule):
             img_size = 224,
             batch_size=8,
             val_split = 0.2,
-            num_workers = 6
+            num_workers = 0
         ):
         super().__init__()
         self.root_dir = Path(os.getcwd(), data_dir)

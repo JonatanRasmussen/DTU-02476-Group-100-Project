@@ -1,6 +1,7 @@
 docs/site/
 data/raw/
 lightning_logs/
+
 # test cache
 manual_test/
 

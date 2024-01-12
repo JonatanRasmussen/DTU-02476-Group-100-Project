@@ -1,7 +1,7 @@
 from pytorch_lightning import Trainer, seed_everything
 
 from data.data import DataModule
-from models.model import ImageClassifier
+from models.model import ImageClassifier,CNN_Model
 from torchvision import transforms 
 
 import hydra
@@ -56,8 +56,53 @@ def main(cfg : DictConfig):
     # Testing model
     trainer.test(dataloaders = data_module.test_dataloader())
 
+
+@hydra.main(version_base=None, config_path="conf", config_name="config")
+def train(cfg : DictConfig):
+
+    # Seeding for reproducibility
+    seed_everything(cfg.reproducibility.seed)
+
+    #-----------------------------------------------------------
+    # Setting up the data
+    data_module = DataModule(
+        data_dir=cfg.data.dir,
+        transform_level=cfg.data.transform_level,
+        img_size=224,
+        batch_size=cfg.data.batch_size,
+        val_split=cfg.data.val_split,
+    )
+    data_module.setup()
+
+    #-----------------------------------------------------------
+    # Choosing a model
+    model = CNN_Model(
+        num_classes=5,
+        lr = 3e-4,
+        optimizer=cfg.optimization.optimizer,
+        criterion=cfg.optimization.criterion
+    )
+
+    #-----------------------------------------------------------
+    # Training the model
+    trainer = Trainer(
+        max_epochs = cfg.training.max_epochs,
+        log_every_n_steps = cfg.logging.log_every_n_steps,
+    )
+
+    trainer.fit(model,
+        data_module.train_dataloader(),
+        data_module.val_dataloader()
+    )
+
+    #-----------------------------------------------------------
+    # Testing model
+    trainer.test(dataloaders = data_module.test_dataloader())
+    
+
 if __name__=="__main__":
     # Optional to see the list of models.
     # print(timm.models.list_models())
 
-    main()
+    #main()
+    train()

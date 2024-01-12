@@ -17,7 +17,7 @@ class DataModule(LightningDataModule):
             val_split = 0.2
         ):
         super().__init__()
-        self.root_dir = Path(os.getcwd(), data_dir)
+        self.root_dir = Path(data_dir)
         self.transform_level = transform_level
         self.batch_size = batch_size
         self.val_split = val_split

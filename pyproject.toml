@@ -3,25 +3,25 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = {{ cookiecutter.project_name|tojson }}
+name = "project_winegrape_src_files"
 version = "0.0.1"
-description = {{ cookiecutter.description|tojson }}
+description = "DTU 02476 Group 100 project"
 authors = [
-  { name = {{ cookiecutter.author_name|tojson }}, email = "your@email.com" },
+  { name = "JonatanRasmussen", email = "s183649@student.dtu.dk" },
 ]
-{% if cookiecutter.open_source_license != 'No license file' %}license = { file = "LICENSE" }{% endif %}
+license = { file = "LICENSE" }
 readme = "README.md"
-requires-python = ">={{ cookiecutter.python_version_number }}"
+requires-python = ">=3.6"
 dynamic = ["dependencies", "optional-dependencies"]
 
 [tool.setuptools]
-packages = ["{{cookiecutter.project_name}}"]
+packages = ["project_winegrape_src_files"]
 
 [tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
+dependencies = { file = ["requirements.txt"] }
 
 [tool.setuptools.dynamic.optional-dependencies]
-dev = {file = ['requirements_dev.txt']}
+dev = { file = ['requirements_dev.txt'] }
 
 [tool.ruff]
 line-length = 120

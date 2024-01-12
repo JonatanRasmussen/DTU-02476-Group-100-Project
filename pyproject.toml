@@ -5,13 +5,13 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "project_winegrape_src_files"
 version = "0.0.1"
-description = "DTU 02476 Group 100 project"
+description = "Your project description"
 authors = [
-  { name = "JonatanRasmussen", email = "s183649@student.dtu.dk" },
+  { name = "Your Name", email = "your@email.com" },
 ]
 license = { file = "LICENSE" }
 readme = "README.md"
-requires-python = ">=3.6"
+requires-python = "~=3.10.13"
 dynamic = ["dependencies", "optional-dependencies"]
 
 [tool.setuptools]

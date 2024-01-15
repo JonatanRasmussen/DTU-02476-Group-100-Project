@@ -1,8 +1,8 @@
-from ..data.data import DataModule
+from project_winegrape_src_files.data.data import DataModule
 from hydra import initialize, compose
 
 def test_data():
-    with initialize(version_base=None, config_path="../conf"):
+    with initialize(version_base=None, config_path="../project_winegrape_src_files/conf"):
         test_cfg = compose(config_name="test_config")
         data_module = DataModule(
             data_dir=test_cfg.data.dir,

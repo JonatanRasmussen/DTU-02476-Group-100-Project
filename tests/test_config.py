@@ -2,7 +2,7 @@ from hydra import initialize, compose
 import os
 
 def test_config() -> None:
-    with initialize(version_base=None, config_path="../conf"):
+    with initialize(version_base=None, config_path="../project_winegrape_src_files/conf"):
         test_cfg = compose(config_name="test_config")
         # assert top level keys
         assert "reproducibility" in test_cfg.keys()

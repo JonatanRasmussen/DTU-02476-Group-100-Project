@@ -2,7 +2,7 @@ reproducibility:
   seed: 123
 
 data:
-  dir: "project_winegrape_src_files/tests/test_data/raw/grapevine-leaves-image-dataset/Grapevine_Leaves_Image_Dataset"
+  dir: "tests/test_data/raw/grapevine-leaves-image-dataset/Grapevine_Leaves_Image_Dataset"
   transform_level: "light"
   batch_size: 32
   val_split: 0.2

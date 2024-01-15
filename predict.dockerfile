@@ -11,6 +11,7 @@ COPY requirements.txt requirements.txt
 COPY pyproject.toml pyproject.toml
 COPY project_winegrape_src_files/ project_winegrape_src_files/
 COPY data/ data/
+COPY checkpoints/ checkpoints/
 
 # Install Python dependencies
 
@@ -19,12 +20,7 @@ RUN --mount=type=cache,target=~/pip/.cache pip install -r requirements.txt --no-
 RUN pip install . --no-deps --no-cache-dir
 
 # Set the entrypoint for the container
-ENTRYPOINT ["python", "-u", "project_winegrape_src_files/train_model.py"]
+ENTRYPOINT ["python", "-u", "project_winegrape_src_files/predict_model.py"]
 
-# To run in docker:
-# docker run --shm-size=1g --name experiment1 trainer:latest
-# with wandb:
-# docker run -e WANDB_API_KEY=<your-api-key> wandb:latest
-
-# final:
-# docker run --shm-size=1g -v $PWD/checkpoints/:/checkpoints/ -e WANDB_API_KEY=<your-api-key> --name experiment3 trainer:latest
+# to run:
+# docker run --name predict1 predict:latest

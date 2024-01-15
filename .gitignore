@@ -1,6 +1,5 @@
 docs/site/
 data/raw/
-lightning_logs/
 
 # test cache
 manual_test/
@@ -183,3 +182,10 @@ cython_debug/
 
 # Hydra
 outputs/
+
+# Lightning checkpoints created
+checkpoints/*
+
+#weights and biases
+wandb/
+

@@ -12,18 +12,16 @@ model:
   #model_name: "efficientnet_b0" # or resnetv2_50t
   model_name: "CNN"
   num_classes: 5
-  drop_rate: 0.3
-  pretrained: true
 
 
 optimization:
-  lr_pretrained: 1e-5
-  lr_final: 1e-4
-  optimizer: "AdamW"
+  lr: 3e-4
+  optimizer: "Adam"
   criterion: "cross_entropy"
 
 training:
-  max_epochs: 20
+  max_epochs: 10
 
 logging:  
   log_every_n_steps: 5
+  wandb_project: 'vinegrape-classification'

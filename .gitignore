@@ -186,3 +186,5 @@ outputs/
 #weights and biases
 wandb/
 
+# Checkpoints trained model
+checkpoints/*

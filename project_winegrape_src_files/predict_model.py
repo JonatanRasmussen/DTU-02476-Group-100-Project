@@ -54,8 +54,8 @@ def inference(cfg : DictConfig):
             accuracy = model.calc_accuracy(preds, labels)
             
             print(f"number of test images: {n_images}")
-            print('train_loss', loss.item())
-            print('train_accuracy', accuracy.item()*100, "%")
+            print('test_loss', loss.item())
+            print('test_accuracy', accuracy.item()*100, "%")
 
 if __name__=="__main__":
     inference()

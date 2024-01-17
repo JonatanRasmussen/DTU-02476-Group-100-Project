@@ -23,4 +23,5 @@ RUN pip install . --no-deps --no-cache-dir
 ENTRYPOINT ["python", "-u", "project_winegrape_src_files/predict_model.py"]
 
 # to run:
+# docker build -f predict.dockerfile . -t predict:latest
 # docker run --name predict1 predict:latest

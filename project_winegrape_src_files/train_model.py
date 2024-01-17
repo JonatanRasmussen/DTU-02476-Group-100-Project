@@ -1,13 +1,14 @@
 from pytorch_lightning import Trainer, seed_everything
+from pytorch_lightning.loggers import WandbLogger
+from pytorch_lightning.callbacks import ModelCheckpoint
 
 from data.data import DataModule
 from models.model import ImageClassifier,CNN_Model
-from torchvision import transforms 
 
 import hydra
 from omegaconf import DictConfig, OmegaConf
 
-@hydra.main(version_base=None, config_path="conf", config_name="config1")
+@hydra.main(version_base=None, config_path="conf", config_name="config2")
 def main(cfg : DictConfig):
     """
     Python script used to train and validate deep learning models.
@@ -37,7 +38,7 @@ def main(cfg : DictConfig):
     if cfg.model.model_name=="CNN":
         model = CNN_Model(
             num_classes=cfg.model.num_classes,
-            lr = cfg.optimization.lr_final,
+            lr = cfg.optimization.lr,
             optimizer=cfg.optimization.optimizer,
             criterion=cfg.optimization.criterion
         )
@@ -58,7 +59,17 @@ def main(cfg : DictConfig):
     # Training the model
     trainer = Trainer(
         max_epochs = cfg.training.max_epochs,
+        logger=WandbLogger(name=cfg.model.model_name, project=cfg.logging.wandb_project),
         log_every_n_steps = cfg.logging.log_every_n_steps,
+        callbacks=[
+            ModelCheckpoint(
+                dirpath="checkpoints/",
+                filename=cfg.model.model_name + "_best_model",
+                save_top_k=1,
+                monitor="val_accuracy",
+                mode="max",
+            )
+        ]
     )
 
     trainer.fit(model,
@@ -66,13 +77,5 @@ def main(cfg : DictConfig):
         data_module.val_dataloader()
     )
 
-    #-----------------------------------------------------------
-    # Testing model
-    trainer.test(dataloaders = data_module.test_dataloader())
-    
-
 if __name__=="__main__":
-    # Optional to see the list of models.
-    # print(timm.models.list_models())
-
     main()

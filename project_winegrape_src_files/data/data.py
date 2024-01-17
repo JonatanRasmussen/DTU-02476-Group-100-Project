@@ -70,8 +70,8 @@ class DataModule(LightningDataModule):
     
         train_dataset = Subset(train_dataset, indices[split_idx:])
         val_dataset = Subset(val_dataset, indices[:split_idx]) 
-        val_dataset, test_dataset = torch.utils.data.random_split(val_dataset, [0.9, 0.1])
-        
+        val_dataset, test_dataset = torch.utils.data.random_split(val_dataset, [0.8, 0.2])
+
         self.train_dataset = DataLoader(train_dataset, batch_size=self.batch_size, shuffle=True, num_workers = self.num_workers)
         self.val_dataset = DataLoader(val_dataset, batch_size=self.batch_size, shuffle = False, num_workers = self.num_workers)
         self.test_dataset = DataLoader(test_dataset, batch_size=len(test_dataset), shuffle = False, num_workers = self.num_workers)

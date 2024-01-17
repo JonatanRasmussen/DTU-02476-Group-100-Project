@@ -17,12 +17,13 @@ model:
 
 optimization:
   lr_pretrained: 1e-5
-  lr_final: 1e-4
+  lr_final: 3e-4
   optimizer: "AdamW"
   criterion: "cross_entropy"
 
 training:
-  max_epochs: 20
+  max_epochs: 10
 
 logging:  
   log_every_n_steps: 5
+  wandb_project: 'vinegrape-classification'

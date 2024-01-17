@@ -1,6 +1,5 @@
 docs/site/
 data/raw/
-lightning_logs/
 
 # test cache
 manual_test/
@@ -183,3 +182,7 @@ cython_debug/
 
 # Hydra
 outputs/
+
+#weights and biases
+wandb/
+

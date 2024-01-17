@@ -1,4 +1,7 @@
 [core]
-    remote = storage
+    remote = remote_storage
 ['remote "storage"']
     url = gdrive://1Pa90Xaxq2sbBJ_d86NK2oqITRtouy9Ir
+['remote "remote_storage"']
+    url = gs://vinegrape_data/
+    version_aware = true

@@ -50,32 +50,32 @@ end of the project.
 
 ### Week 1
 
-* [ ] Create a git repository
-* [ ] Make sure that all team members have write access to the github repository
-* [ ] Create a dedicated environment for you project to keep track of your packages
-* [ ] Create the initial file structure using cookiecutter
-* [ ] Fill out the `make_dataset.py` file such that it downloads whatever data you need and
-* [ ] Add a model file and a training script and get that running
-* [ ] Remember to fill out the `requirements.txt` file with whatever dependencies that you are using
-* [ ] Remember to comply with good coding practices (`pep8`) while doing the project
-* [ ] Do a bit of code typing and remember to document essential parts of your code
-* [ ] Setup version control for your data or part of your data
-* [ ] Construct one or multiple docker files for your code
-* [ ] Build the docker files locally and make sure they work as intended
-* [ ] Write one or multiple configurations files for your experiments
-* [ ] Used Hydra to load the configurations and manage your hyperparameters
-* [ ] When you have something that works somewhat, remember at some point to to some profiling and see if
+* [x] Create a git repository
+* [x] Make sure that all team members have write access to the github repository
+* [x] Create a dedicated environment for you project to keep track of your packages
+* [x] Create the initial file structure using cookiecutter
+* [x] Fill out the `make_dataset.py` file such that it downloads whatever data you need and
+* [x] Add a model file and a training script and get that running
+* [x] Remember to fill out the `requirements.txt` file with whatever dependencies that you are using
+* [x] Remember to comply with good coding practices (`pep8`) while doing the project
+* [x] Do a bit of code typing and remember to document essential parts of your code
+* [x] Setup version control for your data or part of your data
+* [x] Construct one or multiple docker files for your code
+* [x] Build the docker files locally and make sure they work as intended
+* [x] Write one or multiple configurations files for your experiments
+* [x] Used Hydra to load the configurations and manage your hyperparameters
+* [x] When you have something that works somewhat, remember at some point to to some profiling and see if
       you can optimize your code
-* [ ] Use Weights & Biases to log training progress and other important metrics/artifacts in your code. Additionally,
+* [x] Use Weights & Biases to log training progress and other important metrics/artifacts in your code. Additionally,
       consider running a hyperparameter optimization sweep.
-* [ ] Use Pytorch-lightning (if applicable) to reduce the amount of boilerplate in your code
+* [x] Use Pytorch-lightning (if applicable) to reduce the amount of boilerplate in your code
 
 ### Week 2
 
-* [ ] Write unit tests related to the data part of your code
-* [ ] Write unit tests related to model construction and or model training
-* [ ] Calculate the coverage.
-* [ ] Get some continuous integration running on the github repository
+* [x] Write unit tests related to the data part of your code
+* [x] Write unit tests related to model construction and or model training
+* [x] Calculate the coverage.
+* [x] Get some continuous integration running on the github repository
 * [ ] Create a data storage in GCP Bucket for you data and preferable link this with your data version control setup
 * [ ] Create a trigger workflow for automatically building your docker images
 * [ ] Get your model training in GCP using either the Engine or Vertex AI
@@ -94,9 +94,9 @@ end of the project.
 
 ### Additional
 
-* [ ] Revisit your initial project description. Did the project turn out as you wanted?
-* [ ] Make sure all group members have a understanding about all parts of the project
-* [ ] Uploaded all your code to github
+* [x] Revisit your initial project description. Did the project turn out as you wanted?
+* [x] Make sure all group members have a understanding about all parts of the project
+* [x] Uploaded all your code to github
 
 ## Group information
 
@@ -247,7 +247,7 @@ Code quality and formatting matters in larger projects, as you reach a point whe
 >
 > Answer:
 
-We are primarily testing the data handling and model functionality, we well as a few other files in our codebase. The tests ensure that data loading and processing steps were consistent and error-free, and that the model's core functionalities, like training and prediction, were working as we expected it to. Although it's never exciting to write tests, we wanted a baseline level of testing, as well as a reasonable code coverage to feel more confident in the correctness of our project.
+We are primarily testing the data handling and model functionality, as well as a few other files in our codebase. The tests ensure that data loading and processing steps were consistent and error-free, and that the model's core functionalities, like training and prediction, were working as we expected it to. We wanted a baseline level of testing, as well as a reasonable code coverage to feel more confident in the correctness of our project.
 
 ### Question 8
 
@@ -279,11 +279,13 @@ Our code coverage was aimed at approximately 75-90% throughout most of the proje
 
 In our project, we utilized Git branches and pull requests to manage code changes and maintain code quality. This was done via Github.com. We decided to have each team member create their own branches for specific features. This ensured that the main branch always remained stable.
 
-Once a feature was completed and locally tested, a pull request was created. We did not do code reviews or PRs for each other, as this added needless bureaucracy. Instead we decided to trust eachother in managing their own commits.
+Once a feature was completed and locally tested, a pull request was created. We did not do code reviews or PRs for each other, as this added needless bureaucracy. Instead we decided to trust eachother in managing their own commits. 
+
+On top of that, when creating a PR, it also triggers our chosen Continuous Integration (CI) tool - Github Actions. This process involved running our suite of tests on the proposed code changes. The primary purpose of this CI tool was to provide reassurance that the new code did not introduce any errors or failures. If all tests passed, we could confidently merge the new code into the main branch, knowing that it maintained the stability and integrity of our project.
 
 We were concerned about duplicate work due to group members not being completely up-to-date regarding what the other group members were working on. We compensated for this by asking everyone to frequently push/merge to the main-branch.
 
-Luckily for our team, many group members were already experienced with using Git so this workflow came natural for us.
+Luckily for our team, many group members were already experienced with using Git as Version Control System (VCS), so this workflow came natural for us.
 
 ### Question 10
 
@@ -298,8 +300,9 @@ Luckily for our team, many group members were already experienced with using Git
 >
 > Answer:
 
-In our project, we used Data Version Control (DVC) to handle very large files, such as our data set. Github is a service meant for smaller files, such as text, so we wanted to use a separate system for handeling our largest files. We used google drive for external hosting, which would allow us to track separate versions of the data if needed. By doing this, we ensured the synchronization of data storage with code, helping us link the right data version with the corresponding code version. As we understand it, DVS excels at collaborating on data analysis or machine learning projects where data changes need to be as transparent and trackable as code changes. Using DVC allowed us facilitate a high degree of reproducibility, which is just as critical in machine learning projects as in regular software projects.
+In our project, we used Data Version Control (DVC) to handle very large files, such as our data set. Github is a service meant for smaller files, such as text, so we wanted to use a separate system and dedicated remote storage system. We used google drive for external hosting, which would allow us to track separate versions of the data if needed. By doing this, we ensured the synchronization of data storage with code, helping us link the right data version with the corresponding code version. As we understand it, DVC excels at collaborating on data analysis or machine learning projects where data changes need to be as transparent and trackable as code changes. Using DVC allowed us facilitate a high degree of reproducibility, which is just as critical in machine learning projects as in regular software projects.
 
+When it comes to Docker, it is also great for environmental consistency and portability. Docker containers encapsulate the application and its environment, ensuring that it works uniformly across different systems. This encapsulation includes the application, its dependencies, and the environment settings. As a result, Docker significantly reduces the ‘it works on my machine’ problem, providing a consistent environment for the application from development to production.
 ### Question 11
 
 > **Discuss you continues integration setup. What kind of CI are you running (unittesting, linting, etc.)? Do you test**
@@ -380,8 +383,18 @@ To ensure the reproducibility of our experiments, we used many of the tools taug
 >
 > Answer:
 
---- question 15 fill here ---
+For our project we developed several images: one for training and one for prediction.
 
+To run the training Docker images, we used the following commands respectively:
+
+```bash
+docker run trainer:latest
+docker run predict:latest
+```
+
+Link to Docker:
+
+We integrated DVC into our Docker images for reproducibility and versioning. DVC enables us to systematically track and manage datasets alongside our code, ensuring that modifications to the data are diligently recorded and can be easily replicated across various stages of the project.
 ### Question 16
 
 > **When running into bugs while trying to run your experiments, how did you perform debugging? Additionally, did you**
@@ -563,6 +576,6 @@ Overall, while these challenges were initially time-consuming and sometimes frus
 
 - Contributions from Oskar Kristoffersen s184364: (Placeholder)
 
-- Contributions from Pelle Andersen s205339: (Placeholder)
+- Contributions from Pelle Andersen s205339: Docker, DVC.
 
 - Contributions from Siyao Gui s232897: (Placeholder)

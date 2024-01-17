@@ -1,2 +1,0 @@
-from project_winegrape_src_files.models.model import ImageClassifier
-from project_winegrape_src_files.predict_model import predict

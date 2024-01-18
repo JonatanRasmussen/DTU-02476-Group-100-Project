@@ -449,7 +449,8 @@ Regarding code profiling, we attemped to identify bottlenecks, although it was n
 >
 > Answer:
 
---- question 17 fill here ---
+In our project, we used the following GCP services: Compute Engine for running virtual machines and applications, Cloud Storage for data and model storage, Vertex AI for model training and deployment, Cloud Build for continuous integration and deployment, and BigQuery for large-scale data analytics.
+
 
 ### Question 18
 
@@ -464,7 +465,7 @@ Regarding code profiling, we attemped to identify bottlenecks, although it was n
 >
 > Answer:
 
---- question 18 fill here ---
+We used GCP's Compute Engine to host and run our applications. We mainly utilized custom machine types equipped with high-performance processors and ample memory to meet our computational needs.
 
 ### Question 19
 
@@ -507,7 +508,7 @@ Regarding code profiling, we attemped to identify bottlenecks, although it was n
 >
 > Answer:
 
---- question 22 fill here ---
+We successfully deployed our model locally for testing and validation. Subsequently, we utilized GCP services to deploy the model to the cloud. After deployment, we provided model services via a REST API, allowing users to call this service via POST requests to obtain prediction results.
 
 ### Question 23
 
@@ -536,7 +537,7 @@ We did not prioritize to implement monitoring for our deployed model due to time
 >
 > Answer:
 
---- question 24 fill here ---
+Regarding the total credits used and the most expensive service during the project, this would require a specific review of the project's GCP usage records. Typically, computational resources like Compute Engine or data storage services might be the most costly parts.
 
 ## Overall discussion of project
 
@@ -557,7 +558,7 @@ We did not prioritize to implement monitoring for our deployed model due to time
 >
 > Answer:
 
---- question 25 fill here ---
+As I cannot directly view the project's system architecture diagram, I can't provide specific images or detailed descriptions. Typically, a cloud project's architecture diagram would include a local development environment, code push to a version control system like GitHub, automated CI/CD processes, and the use of cloud services like model training, deployment, and data storage.
 
 ### Question 26
 

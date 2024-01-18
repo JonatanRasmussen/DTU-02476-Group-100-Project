@@ -279,13 +279,9 @@ Our code coverage was aimed at approximately 75-90% throughout most of the proje
 
 In our project, we utilized Git branches and pull requests to manage code changes and maintain code quality. This was done via Github.com. We decided to have each team member create their own branches for specific features. This ensured that the main branch always remained stable.
 
-Once a feature was completed and locally tested, a pull request was created. We did not do code reviews or PRs for each other, as this added needless bureaucracy. Instead we decided to trust eachother in managing their own commits. 
+Once a feature was completed and locally tested, a pull request was created. We did not do code reviews or PRs for each other, as this added needless bureaucracy. Instead we decided to trust eachother in managing their own commits.
 
 On top of that, when creating a PR, it also triggers our chosen Continuous Integration (CI) tool - Github Actions. This process involved running our suite of tests on the proposed code changes. The primary purpose of this CI tool was to provide reassurance that the new code did not introduce any errors or failures. If all tests passed, we could confidently merge the new code into the main branch, knowing that it maintained the stability and integrity of our project.
-
-We were concerned about duplicate work due to group members not being completely up-to-date regarding what the other group members were working on. We compensated for this by asking everyone to frequently push/merge to the main-branch.
-
-Luckily for our team, many group members were already experienced with using Git as Version Control System (VCS), so this workflow came natural for us.
 
 ### Question 10
 
@@ -300,9 +296,10 @@ Luckily for our team, many group members were already experienced with using Git
 >
 > Answer:
 
-In our project, we used Data Version Control (DVC) to handle very large files, such as our data set. Github is a service meant for smaller files, such as text, so we wanted to use a separate system and dedicated remote storage system. We used google drive for external hosting, which would allow us to track separate versions of the data if needed. By doing this, we ensured the synchronization of data storage with code, helping us link the right data version with the corresponding code version. As we understand it, DVC excels at collaborating on data analysis or machine learning projects where data changes need to be as transparent and trackable as code changes. Using DVC allowed us facilitate a high degree of reproducibility, which is just as critical in machine learning projects as in regular software projects.
+In our project, we used Data Version Control (DVC) to handle very large files, such as our data set. Github is a service meant for smaller files, such as text, so we wanted to use a separate system and dedicated remote storage system. We used google drive for external hosting, which would allow us to track separate versions of the data if needed. By doing this, we ensured the synchronization of data storage with code, helping us link the right data version with the corresponding code version. Using DVC allowed us facilitate a high degree of reproducibility, which is just as critical in machine learning projects as in regular software projects.
 
 When it comes to Docker, it is also great for environmental consistency and portability. Docker containers encapsulate the application and its environment, ensuring that it works uniformly across different systems. This encapsulation includes the application, its dependencies, and the environment settings. As a result, Docker significantly reduces the ‘it works on my machine’ problem, providing a consistent environment for the application from development to production.
+
 ### Question 11
 
 > **Discuss you continues integration setup. What kind of CI are you running (unittesting, linting, etc.)? Do you test**
@@ -317,7 +314,11 @@ When it comes to Docker, it is also great for environmental consistency and port
 >
 > Answer:
 
---- question 11 fill here ---
+In our continuous integration (CI) setup, we have a workflow designed to be reliable and always-working. We are using Github Actions to run our tests (pytest framework) each time a pull request is made to the main branch. We have intentionally only implemented this on the main branch, as the feature-branches are more experimental in nature. By running a Github Action each time a change is made, we can automatically run our tests, which will notify us in case that something is not working.
+
+The CI workflow is configured to run on the ubuntu-latest environment. While currently focused on Ubuntu, it's a good practice to extend testing to multiple operating systems. We could improve our setup by including different OS environments as needed. Our tests are executed with Python version 3.10, ensuring compatibility with the specified Python version. This helps catch any version-specific issues early in development. Caching is employed to optimize workflow performance; we cache pip dependencies, which allows us to reuse dependencies from previous workflow runs. This significantly speeds up the installation process, especially in the case of large dependencies.
+
+A complete overview of our CI workflow can be found in the "Actions" tab of our GitHub repository. A link can be found here: [Link](https://github.com/JonatanRasmussen/DTU-02476-Group-100-Project/actions). Utilizing a CI setup helps us maintain a structured and functional codebase, and we have primarily relied on Github Actions to achieve this.
 
 ## Running code and tracking experiments
 
@@ -336,7 +337,11 @@ When it comes to Docker, it is also great for environmental consistency and port
 >
 > Answer:
 
---- question 12 fill here ---
+In our project, we configured experiments using configuration files with Hydra. Hydra allows us to organize and customize experiment settings easily. Here's an example of how to run an experiment using the train_model.py script with a specific configuration file "config1":
+
+python train_model.py --config-file=conf/config1.yaml
+
+We also have a test_config.yaml file with a unique setup and dataset for running our pytests
 
 ### Question 13
 
@@ -351,7 +356,7 @@ When it comes to Docker, it is also great for environmental consistency and port
 >
 > Answer:
 
-To ensure the reproducibility of our experiments, we used many of the tools taught during the course. We tried using config file where it made sense to do so, which documented all the settings and parameters used. This made it easy to replicate or modify experiments. Additionally, we also used version control for both code and configs (we used Git for this). This ensured that we could always revert to or examine the state of the code for any given experiment. Logged was also used to document what happened each time the code was run, which helps for both debugging as well as validating a succesful reproduction of results. Finally, we also used DVC to handle the changes made to very large files, while also ensuring that we could revert back to earlier version of said files.
+To ensure the reproducibility of our experiments, we used many of the tools taught during the course. We used config files to maintain consistent configurations, so that all the settings and parameters are saved for later use. This made it easy to replicate or modify experiments. Additionally, we also used version control for both code and configs (we used Git for this). This ensured that we could always revert to or examine the state of the code for any given experiment. Logging were also used to document what happened each time the code was run, which helps for both debugging as well as validating a succesful reproduction of results. Finally, we also used DVC to handle the changes made to very large files, while also ensuring that we could revert back to earlier version of said files.
 
 ### Question 14
 
@@ -368,7 +373,21 @@ To ensure the reproducibility of our experiments, we used many of the tools taug
 >
 > Answer:
 
---- question 14 fill here ---
+We have used W&B (Weights & Biases) to log and track the parameters, metrics, and artifacts (such as models, datasets, and images) of our machine learning experiments. This allows us to neatly store a record of all experiments, making it easier to compare and reproduce results. It also provides interactive visualizations for metrics and results, making it easier to understand the performance of models over time. Additionally, it stores information about the developer environment used to carry out the experiment, linking it to specific models, datasets, or code versions.
+
+```markdown
+![Screenshot1](figures/<JonatanTestWB>.<png>)
+```
+
+[Here](figures/JonatanTestWB.png) is a visual summary of running the train_model script for a short duration with the default parameters. It highlights key training and validation metrics such as accuracy and loss, graphing the improvements over the course of the iterations. The results are not groundbreaking; the screenshot is meant to showcase why using W&B is useful for ML projects such as ours.
+
+```markdown
+![Screenshot2](figures/<JonatanTestOverviewWB>.<png>)
+```
+
+[Here](figures/JonatanTestOverviewWB.png) is an overview of the environment used to perform the training, including training duration, hardware and Git repository + state. Again, the screenshot is meant to showcase the utility of W&B and why we are using it for our ML project.
+
+By using W&B, we are able to track key training and validation metrics such as accuracy and loss, as well as visualizing them. This is key data to track for a classification-project such as our winegrape project, as they indicate to what extend our model is able to classify the winegrape leaves.
 
 ### Question 15
 
@@ -383,6 +402,8 @@ To ensure the reproducibility of our experiments, we used many of the tools taug
 >
 > Answer:
 
+Docker is a tool that can be used to build, share, and run container applications, which ensures that a code execution environment can be replecated across machines.
+
 For our project we developed several images: one for training and one for prediction.
 
 To run the training Docker images, we used the following commands respectively:
@@ -395,6 +416,7 @@ docker run predict:latest
 Link to Docker:
 
 We integrated DVC into our Docker images for reproducibility and versioning. DVC enables us to systematically track and manage datasets alongside our code, ensuring that modifications to the data are diligently recorded and can be easily replicated across various stages of the project.
+
 ### Question 16
 
 > **When running into bugs while trying to run your experiments, how did you perform debugging? Additionally, did you**
@@ -569,8 +591,9 @@ Overall, while these challenges were initially time-consuming and sometimes frus
 > *All members contributed to code by...*
 >
 > Answer:
+The following is a description of the contributions of each group member:
 
-- Contributions from Jonatan Rasmussen s183649: (Placeholder)
+- Contributions from Jonatan Rasmussen s183649: Github, mlops_template, test_data, reports/README questions
 
 - Contributions from Lucca Seyther s223280: (Placeholder)
 
@@ -579,3 +602,5 @@ Overall, while these challenges were initially time-consuming and sometimes frus
 - Contributions from Pelle Andersen s205339: Docker, DVC.
 
 - Contributions from Siyao Gui s232897: (Placeholder)
+
+

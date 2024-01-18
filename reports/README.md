@@ -555,7 +555,7 @@ Regarding the total credits, since we trained our models only on a CPU we were a
 The starting point of the diagram is our local development setup, where we can perform basic training and predictions using a Python venv or building and running a Dockerfile. 
 To add/update local data, DVC is used which stores and keeps track of the data using a Google Storage Bucket and our Google Drive. Whenever we commit code and push to GitHub, it triggers a GitHub action that runs our unit tests using `pytest` and produces a coverage report. Also, a cloud build trigger is executed that builds a Docker image using the `cloudbuild.yaml` file and the current state of data and links the Weights & Biases API key to the image. After build, our image is stored in Google's Container Registry and we are able to create a custom AI job using Vertex AI. To monitor this training job, its status is regurlarly sent to our Weight & Biases account. For future work a Docker image for predictions could be served as a pre-trained model which could be retrieved from a Google Storage Bucket. A potential user could then automatically identify vineleaves using this image or retrain another model provided that the training image is made available.
 
-Here is an image of our architecture: [Link](reports/architecture.png).
+Here is an image of our architecture: [Link](figures/architecture.png).
 
 ### Question 26
 

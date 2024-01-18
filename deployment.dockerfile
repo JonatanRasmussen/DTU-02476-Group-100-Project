@@ -9,8 +9,9 @@ RUN pip install requests
 RUN pip install fastapi
 RUN pip install uvicorn
 COPY /project_winegrape_src_files /project_winegrape_src_files
+COPY /checkpoints /checkpoints
 
-CMD ["uvicorn", "project_winegrape_src_files.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "project_winegrape_src_files.results_api:app", "--host", "0.0.0.0", "--port", "8000"]
 
 # to run:
 # docker build -f deployment.dockerfile . -t deployment:latest

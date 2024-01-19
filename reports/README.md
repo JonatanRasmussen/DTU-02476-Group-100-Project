@@ -322,7 +322,7 @@ We also have a test_config.yaml file with a unique setup and dataset for running
 
 To ensure the reproducibility of our experiments, we used many of the tools taught during the course. We used config files to maintain consistent configurations, so that all the settings and parameters are saved for later use. This made it easy to replicate or modify experiments. Additionally, we also used version control for both code and configs (we used Git for this). This ensured that we could always revert to or examine the state of the code for any given experiment. Logging were also used to document what happened each time the code was run, which helps for both debugging as well as validating a succesful reproduction of results. We also used DVC to handle the changes made to very large files, while also ensuring that we could revert back to earlier version of said files.
 
-e it.We also used Docker, which is great for environmental consistency and portability, and being able to reprodu Docker containers encapsulate the application and its environment, ensuring that it works uniformly across different systems. This encapsulation includes the application, its dependencies, and the environment settings. As a result, Docker significantly reduces the ‘it works on my machine’ problem, providing a consistent environment for the application from development to production.
+Docker containers encapsulate the application and its environment, ensuring that it works uniformly across different systems. This encapsulation includes the application, its dependencies, and the environment settings. As a result, Docker significantly reduces the ‘it works on my machine’ problem, providing a consistent environment for the application from development to production.
 
 ### Question 14
 
@@ -417,7 +417,7 @@ Regarding code profiling, we attemped to identify bottlenecks, although it was n
 >
 > Answer:
 
-In our project, we used the following GCP services: Compute Engine for running virtual machines and applications, Cloud Storage to create a bucket with the data that we managed to transfer with DVC. We also used Vertex AI for model training and deployment and to do so we used Cloud Build for continuous integration and deployment to create a docker image each time.something new was pushed to the repository
+In our project, we used the following GCP services: Compute Engine for running virtual machines and applications, Cloud Storage to create a bucket with the data that we managed to transfer with DVC. We also used Vertex AI for model training and deployment and to do so we used Cloud Build for continuous integration and deployment to create a docker image each time.
 
 ### Question 18
 
@@ -430,6 +430,7 @@ In our project, we used the following GCP services: Compute Engine for running v
 > *We used the compute engine to run our ... . We used instances with the following hardware: ... and we started the*
 > *using a custom container: ...*
 >
+> Answer:
 
 We used GCP's Compute Engine initially to try to run our container images, but after creating a VM and accessing it, the python version seemed to be blocked at version 3.7.8, and would therefore not work with our code (needed python 3.10.X or higher). Because of that and further instructions from the course we chose to go down a different route and use Vertex AI instead. It enabled us to run our models using the trainer docker image. We did this by running a command line such as the following:
 
@@ -454,7 +455,7 @@ workerPoolSpecs:
               value: <MY_WANDB_KEY>
 ```
 
-We believe that this also creates a VM with the machine specs from the `config_cpu.yaml`. We tried to also use a configuration with gpu, but without any success. However this was not a problem for us since the docker image was able to run with the cpu configs for 10 epochs in 5-7 minutes. If we were to train the mod### Question 19
+We believe that this also creates a VM with the machine specs from the `config_cpu.yaml`. We tried to also use a configuration with gpu, but without any success. However this was not a problem for us since the docker image was able to run with the cpu configs for 10 epochs in 5-7 minutes.
 
 ### Question 19
 
@@ -468,6 +469,14 @@ Here are two images with the data placed in our GCP bucket:
 [the folders](figures/bucket.png).
 [the data](figures/bucket2.png).
 
+```markdown
+![Screenshot1](figures/<bucket>.<png>)
+```
+
+```markdown
+![Screenshot2](figures/<bucket2>.<png>)
+```
+
 ### Question 20
 
 > **Upload one image of your GCP container registry, such that we can see the different images that you have stored.**
@@ -478,6 +487,10 @@ Here are two images with the data placed in our GCP bucket:
 Here is an image of the GCP Artifacts Registry with our current trainer docker image:
 [registry](figures/registry.png).
 
+```markdown
+![Screenshot1](figures/<registry>.<png>)
+```
+
 ### Question 21
 
 > **Upload one image of your GCP cloud build history, so we can see the history of the images that have been build in**
@@ -487,6 +500,10 @@ Here is an image of the GCP Artifacts Registry with our current trainer docker i
 
 Here is an image of the Cloud Build history. We had some problems with copying the data from GCP bucket to our image, but managed to make it work after the 15th attempt.
 [history](figures/registry.png).
+
+```markdown
+![Screenshot1](figures/<registry>.<png>)
+```
 
 ### Question 22
 
@@ -552,10 +569,15 @@ Regarding the total credits, since we trained our models only on a CPU we were a
 >
 > Answer:
 
-The starting point of the diagram is our local development setup, where we can perform basic training and predictions using a Python venv or building and running a Dockerfile. 
+The starting point of the diagram is our local development setup, where we can perform basic training and predictions using a Python venv or building and running a Dockerfile.
+
 To add/update local data, DVC is used which stores and keeps track of the data using a Google Storage Bucket and our Google Drive. Whenever we commit code and push to GitHub, it triggers a GitHub action that runs our unit tests using `pytest` and produces a coverage report. Also, a cloud build trigger is executed that builds a Docker image using the `cloudbuild.yaml` file and the current state of data and links the Weights & Biases API key to the image. After build, our image is stored in Google's Container Registry and we are able to create a custom AI job using Vertex AI. To monitor this training job, its status is regurlarly sent to our Weight & Biases account. For future work a Docker image for predictions could be served as a pre-trained model which could be retrieved from a Google Storage Bucket. A potential user could then automatically identify vineleaves using this image or retrain another model provided that the training image is made available.
 
 Here is an image of our architecture: [Link](figures/architecture.png).
+
+```markdown
+![Screenshot1](figures/<architecture>.<png>)
+```
 
 ### Question 26
 
